@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐈‍⬛ MrCatBio 🐈‍⬛</title>
+    <style>
+        /* Основные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            animation: gradientShift 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Контейнер */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Заголовок */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+            }
+        }
+        
+        /* Карточка с информацией */
+        .bio-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .bio-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-item {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .info-text {
+            font-size: 1.2rem;
+        }
+        
+        /* Кнопки */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Котики на фоне */
+        .floating-cat {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+            animation: float-cat 25s infinite linear;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+            font-size: 2rem;
+            transition: opacity 1s ease;
+        }
+        
+        @keyframes float-cat {
+            0% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.4;
+            }
+            25% {
+                transform: translateY(-30px) rotate(90deg) scale(1.1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-15px) rotate(180deg) scale(1);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translateY(-25px) rotate(270deg) scale(0.9);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(0px) rotate(360deg) scale(1);
+                opacity: 0.4;
+            }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .info-text {
+                font-size: 1rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .floating-cat {
+                font-size: 1.5rem;
+                animation-duration: 15s;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Плавающие котики на фоне -->
+    <div class="floating-cat" style="top: 10%; left: 5%; animation-delay: 0s;">🐈‍⬛</div>
+    <div class="floating-cat" style="top: 15%; left: 85%; animation-delay: 2s;">🐈</div>
+    <div class="floating-cat" style="top: 35%; left: 75%; animation-delay: 6s;">🐈‍⬛</div>
+    <div class="floating-cat" style="top: 55%; left: 90%; animation-delay: 10s;">🐈</div>
+    <div class="floating-cat" style="top: 65%; left: 25%; animation-delay: 12s;">🐈‍⬛</div>
+    <div class="floating-cat" style="top: 85%; left: 15%; animation-delay: 16s;">🐈</div>
+    <div class="floating-cat" style="top: 95%; left: 70%; animation-delay: 18s;">🐈‍⬛</div>
+    <div class="floating-cat" style="top: 70%; left: 40%; animation-delay: 22s;">🐈</div>
+    
+    <div class="container">
+        <header class="header">
+            <h1>🐈‍⬛ MrCatBio 🐈‍⬛</h1>
+        </header>
+        
+        <main>
+            <div class="bio-card">
+                <div class="info-item">
+                    <div class="info-icon">🌒</div>
+                    <div class="info-text"><strong>Имя:</strong> Михаил</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">🏙️</div>
+                    <div class="info-text"><strong>Город:</strong> Пермь, Россия</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">🕐</div>
+                    <div class="info-text"><strong>Часовой пояс:</strong> MSK+2</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">🎂</div>
+                    <div class="info-text"><strong>День рождения:</strong> 03.05</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">🌌</div>
+                    <div class="info-text"><strong>Увлечения:</strong> Python, JavaScript, Minecraft</div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <a href="https://t.me/mrcat2445" class="btn" target="_blank">
+                    <span class="btn-icon">💬</span>
+                    <span>Telegram</span>
+                </a>
+                
+                <a href="https://t.me/randomcatsbot" class="btn" target="_blank">
+                    <span class="btn-icon">🤖</span>
+                    <span>Random Cats Bot</span>
+                </a>
+                
+                <a href="https://github.com/mrcat2445" class="btn" target="_blank">
+                    <span class="btn-icon">🐱</span>
+                    <span>Мой GitHub, скоро там что-то будет?..</span>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Случайное изменение прозрачности и анимации плавающих котиков
+        const floatingCats = document.querySelectorAll('.floating-cat');
+        
+        setInterval(() => {
+            // Случайное мерцание котиков
+            floatingCats.forEach(cat => {
+                if (Math.random() > 0.8) {
+                    cat.style.opacity = '0.3';
+                    setTimeout(() => {
+                        cat.style.opacity = '0.6';
+                    }, 800);
+                }
+            });
+            
+            // Иногда меняем эмодзи у случайного котика
+            if (Math.random() > 0.9) {
+                const randomCat = floatingCats[Math.floor(Math.random() * floatingCats.length)];
+                const catEmojis = ['🐈‍⬛', '🐈'];
+                const currentEmoji = randomCat.textContent;
+                let newEmoji;
+                
+                do {
+                    newEmoji = catEmojis[Math.floor(Math.random() * catEmojis.length)];
+                } while (newEmoji === currentEmoji);
+                
+                randomCat.textContent = newEmoji;
+                
+                // Временное увеличение
+                randomCat.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    randomCat.style.transform = '';
+                }, 500);
+            }
+        }, 2000);
+        
+        // Плавное появление котиков при загрузке
+        window.addEventListener('load', () => {
+            floatingCats.forEach((cat, index) => {
+                cat.style.opacity = '0';
+                setTimeout(() => {
+                    cat.style.transition = 'opacity 1.5s ease';
+                    cat.style.opacity = '0.6';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
